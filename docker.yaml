@@ -1,0 +1,26 @@
+---
+- name: Installing Docker
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Docker
+      ansible.builtin.yum:
+       name: docker.io
+       state: present
+
+    - name: Start Docker
+      ansible.builtin.service:
+       name: docker
+       state: started
+       enabled: yes
+    - name: Checking the service is running
+      ansible.builtin.service_facts:
+    - name: Displaying the service status
+      ansible.builtin.debug:
+       var: ansible_facts.services['docker.service']
+    - name: creating a user and adding to docker group
+      ansible.builtin.user:
+       name: sahnaik
+       groups: docker
+       append: yes
+        

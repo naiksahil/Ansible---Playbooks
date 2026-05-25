@@ -1,0 +1,16 @@
+
+  - name: installing app
+    ansible.builtin.apt:
+      name: appache2
+      state: present
+  - name: starting appache2
+    ansible.builtin.service:
+      name: appache2
+      state: started
+  - name: Copying html file
+    ansible.builtin.copy:
+      src: /files/index.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      permission: '0644'

@@ -1,0 +1,17 @@
+- name: Installing appache
+  hosts: servers
+  become: yes
+  user: ubuntu
+
+  tasks:
+    - name: installing apache2
+      ansible.builtin.apt:ansible
+      name: apache2 
+      state: present
+    - name: starting apache2
+      ansible.builtin.service:
+        name: apache2
+        state: started
+    - name: printing the message
+      ansible.builtin.debug:
+        msg: "Apache2 has been installed and started successfully."

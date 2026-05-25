@@ -1,0 +1,22 @@
+---
+- name: installing appache
+  hosts: servers
+  user: root
+  tasks:
+  - name: installing apache2
+    ansible.builtin.apt:
+      name: apache2      
+      state: present
+  - name: starting apache2
+    ansible.builtin.service:
+      name: apache2
+      state: started
+  - name: Copying html file
+    ansible.builtin.copy:
+      src: /home/ubuntu/index.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: '0644'
+  
+ 
